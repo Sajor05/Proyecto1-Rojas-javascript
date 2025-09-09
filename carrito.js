@@ -5,10 +5,11 @@
 */
 
 class Producto {
-  constructor(nombre, codigo, precio) {
+  constructor(nombre, codigo, precio, stock) {
     this.nombre = nombre;
     this.codigo = codigo;
     this.precio = precio;
+    this.stock = stock;
   }
 
   getProducto() {
@@ -50,20 +51,40 @@ function mostrarCarrito() {
 */
 
 let carrito = new Array();
+
 const botones = document.querySelectorAll(".agregar");
+
+function crearProducto(boton) {
+  return new Producto(
+    boton.parentElement.querySelector(".nombre").textContent,
+    boton.parentElement.querySelector(".codigo").textContent,
+    boton.parentElement.querySelector(".precio").textContent,
+    Number(boton.parentElement.querySelector(".stock").textContent)
+  );
+}
+
+function verificarStock(producto) {
+  const cantidad = carrito.filter((p) => p.codigo === producto.codigo).length;
+  if (cantidad >= producto.stock) {
+    alert(
+      `¡No puedes agregar más unidades de ${producto.nombre}! Stock disponible: ${producto.stock}`
+    );
+    return false;
+  }
+  return true;
+}
+
+function agregarAlCarrito(producto) {
+  carrito.push(producto);
+  console.log("Producto agregado:", producto.getProducto());
+  mostrarCarrito();
+}
 
 botones.forEach((boton) => {
   boton.addEventListener("click", () => {
-    //Sube una etiqueta arriba y busca adentro de esa etiqueta los span
-    let producto = new Producto(
-      boton.parentElement.querySelector(".nombre").textContent,
-      boton.parentElement.querySelector(".codigo").textContent,
-      boton.parentElement.querySelector(".precio").textContent
-    );
-    carrito.push(producto);
-    console.log("Producto agregado:", producto);
-    mostrarCarrito();
+    const producto = crearProducto(boton);
+    if (verificarStock(producto)) {
+      agregarAlCarrito(producto);
+    }
   });
 });
-
-console.log(carrito);
