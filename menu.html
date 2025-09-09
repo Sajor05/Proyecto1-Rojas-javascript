@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -12,9 +12,8 @@
       <a href="./pages/carrito.html">Ir al carrito</a>
     </header>
 
+    <h2>Catalogo</h2>
     <section class="catalogo">
-      <title><h3>Catalogo</h3></title>
-
       <article>
         <h5>
           <span class="codigo">C01</span> -
@@ -37,7 +36,7 @@
         <h5>
           <span class="codigo">C03</span> -
           <span class="nombre">Pantalon cargo</span>
-          <span class="precio">4500</span>$
+          <span class="precio">$4500</span>
         </h5>
         <button class="agregar">Agregar al carrito</button>
       </article>
@@ -58,6 +57,14 @@
         </h5>
         <button class="agregar">Agregar al carrito</button>
       </article>
+    </section>
+    <section class="carrito">
+      <div class="carrito-title">
+        <h2>Carrito</h2>
+      </div>
+
+      <ul id="carrito-lista"></ul>
+      <p>Total: $<span id="total">0</span></p>
     </section>
   </body>
   <script src="./carrito.js"></script>
